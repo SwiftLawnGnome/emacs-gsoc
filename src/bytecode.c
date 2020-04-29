@@ -132,6 +132,8 @@ DEFINE (Bunbind7, 057)							\
 DEFINE (Bpophandler, 060)						\
 DEFINE (Bpushconditioncase, 061)					\
 DEFINE (Bpushcatch, 062)						\
+/* Testing */								\
+DEFINE (Bsignal, 063)							\
 									\
 DEFINE (Bnth, 070)							\
 DEFINE (Bsymbolp, 071)							\
@@ -794,6 +796,13 @@ exec_byte_code (Lisp_Object bytestr, Lisp_Object vector, Lisp_Object maxdepth,
 	      }
 
 	    NEXT;
+	  }
+
+	CASE (Bsignal):
+	  {
+	    Lisp_Object v1 = POP;
+	    Lisp_Object off = make_fixnum(last_pc - bytestr_data);
+	    Fsignal(TOP, CALLN(Fappend, v1, list1(off)));
 	  }
 
 	CASE (Bpophandler):	/* New in 24.4.  */

@@ -617,6 +617,9 @@ Each element is (INDEX . VALUE)")
 (byte-defop  50 -1 byte-pushcatch)
 (byte-defop  49 -1 byte-pushconditioncase)
 
+;; testing signal opcode for error offset
+(byte-defop  51 -1 byte-signal)
+
 ;; unused: 51-55
 
 (byte-defop  56 -1 byte-nth)
@@ -3546,6 +3549,7 @@ If it is nil, then the handler is \"byte-compile-SYMBOL.\""
 (byte-defop-compiler cons		2)
 (byte-defop-compiler aref		2)
 (byte-defop-compiler set		2)
+(byte-defop-compiler signal		2)
 (byte-defop-compiler (= byte-eqlsign)	2-and)
 (byte-defop-compiler (< byte-lss)	2-and)
 (byte-defop-compiler (> byte-gtr)	2-and)
